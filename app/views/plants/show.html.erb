@@ -1,0 +1,70 @@
+<div class="container col-9 pt-3">
+  <div class="row plant-show-card">
+        <div class="col-6 pl-0">
+          <% if @plant.photo.attached? %>
+            <%= cl_image_tag @plant.photo.key, width: 462, height: 400, crop: :fill, class: "w-100 h-100" %>
+         <% else %>
+            <%= cl_image_tag("placeholder-plant", width: 462, height: 400, crop: :fill, class: "w-100 h-100") %>
+         <% end %>
+        </div>
+        <div class="d-flex flex-column justify-content-around col-6 p-3 mt-3">
+          <div>
+            <h1> <%= @plant.name %> </h1>
+            <h5>About this plant:</h5>
+            <div class="container mt-3 pl-0">
+              <p><i class="fas fa-tint icon"></i> Every <strong>3</strong> days</p>
+              <p><i class="fas fa-sun icon"></i> Outdoor </p>
+              <p><i class="fas fa-ruler icon"></i></i> 30 cms</p>
+            </div>
+          </div>
+          <div class="row mr-0 mt-5 p-0">
+            <div class="col-6">
+              <h5><%= number_to_currency(@plant.price) %>/ day</h5>
+            </div>
+            <div class="col-6 text-right">
+              <% if @plant.user != current_user %>
+                <%= link_to "Book now", new_plant_booking_path(@plant), class: "btn-main" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6 p-0 pr-3">
+      <div class="card text-left align-center">
+        <div class="card-header m-0">
+          <h4>Description</h4>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @plant.description %></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-6 p-0">
+      <div class="card">
+        <div class="card-header">
+          <h4>Reviews</h4>
+        </div>
+        <% @plant.reviews.each do |review| %>
+          <div class="card-body">
+            <h5 class="card-title">
+              <strong>
+                <%= review.booking.user.email.split("@")[0].capitalize %></strong>'s review:
+            </h5>
+            <% review.rating.times do%>
+              <i class="fas fa-star icon"></i>
+            <% end %>
+
+            <% (5 - review.rating).times do %>
+              <i class="far fa-star icon"></i>
+            <% end %>
+            <p class="card-text"> <%= review.content.capitalize %></p>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

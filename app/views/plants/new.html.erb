@@ -1,0 +1,20 @@
+<div class="container mt-4 col-6 pt-3">
+  <h2>Create your plant</h2>
+  <div class="row">
+    <div class="col-6">
+      <%= simple_form_for [@user, @plant] do |f| %>
+        <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :address %>
+        <%= f.input :price %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit "Submit me",  class:"btn-main" %>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <img src="https://cdn.shopify.com/s/files/1/0013/3529/6118/products/Wythe-40-2970.040-WH_Bird-of-Paradise-14.jpg?v=1604354745" width="400" height="500">
+    </div>
+  </div>
+
+</div>
+
