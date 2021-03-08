@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
   def index
     query_result
 
-    @current_user = user_1
+    # @current_user = user_1
 
     @markers = @plants.geocoded.map do |plant|
       {
